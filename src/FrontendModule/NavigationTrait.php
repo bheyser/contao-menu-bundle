@@ -169,7 +169,10 @@ trait NavigationTrait
                     foreach ($GLOBALS['TL_HOOKS']['afterNavigationItemPrepared'] as $callback)
                     {
                         $this->import($callback[0]);
-                        $row = $this->{$callback[0]}->{$callback[1]}($row);
+
+                        $row = $this->{$callback[0]}->{$callback[1]}(
+                            new \FrontendTemplate($this->navigationTpl), $row
+                        );
                     }
                 }
                 // PATCH-END: afterNavigationItemPrepared
